@@ -21,4 +21,12 @@ void main(){
     print('none');
   }
 
+  if(a == "1") {
+    print("object");
+  } else if (a == 'apple') {
+    print("apple");
+  } else {
+    print("no case");
+  }
+
 }
