@@ -44,4 +44,5 @@ void main() {
   //setter 사용 방법
   //클래스. 작성한함수 = 변경할 값;
   num1.changeNumber = 11;
+  print(num1);
 }
