@@ -7,6 +7,6 @@ void createPlayer({
 }
 
 void main() {
-  var Player1 = createPlayer(name: '권태윤', phone: '010-8006-9816', age: '22');
-  var Player2 = createPlayer(name: 'rnjsxodbs', phone: '010-8006-9817');
+  createPlayer(name: '권태윤', phone: '010-8006-9816', age: '22');
+  createPlayer(name: 'rnjsxodbs', phone: '010-8006-9817');
 }

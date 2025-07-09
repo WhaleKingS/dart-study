@@ -1,6 +1,9 @@
-void main(){
-  double Score = (63/{176.0*176.0});
-  var Status;
+double bmi(double m, int kg) {
+  double score = 0.0;
+  score = kg / (m * m);
+  return score;
+}
 
-  if(Score <= 18.4)
+void main() {
+  print(bmi(1.76, 63));
 }
