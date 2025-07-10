@@ -81,7 +81,7 @@ class Integer {
 
 //class newInteger extends 클래스명 {}
 //extends =  다음으로 적힐 클래스명에 있는 모든 내용들을 가져올거야
-class newInteger extends Integer {
+class newInteger extends Integer with ActivationFlag {
   List<int> _list = [];
 
   newInteger([int givenValue = 0]) {
@@ -90,7 +90,12 @@ class newInteger extends Integer {
 
   @override // = Integer 클래스에 있는 토드에서 이 기능들을 더 추가해서 쓸거다라는 의미
   void set(int givenValue) {
-    _list.add(_value);
+    if (activated == true) {
+      _list.add(_value);
+      print("set함수 실행됨. 현재 저장된 결과는 $_list임.");
+    } else {
+      print("set 함수 실행 안함.");
+    }
     super.set(givenValue); // super = 우리가 클래스 생성할때 extends 뒤에 쓴 클래스
   }
 
@@ -102,20 +107,22 @@ class newInteger extends Integer {
   }
 }
 
+mixin ActivationFlag on Integer {
+  bool _flag = true;
+
+  bool get activated => _flag;
+  set activated(bool givenFlag) => (_flag = givenFlag);
+}
 void main() {
-  var newnum1 = newInteger();
+  var num1 = newInteger();
 
-  newnum1.set(9);
-  print(newnum1.get());
+  num1.set(2);
+  num1.set(4);
 
-  print(newnum1.asString);
-  newnum1.changeNumber = 2;
-  print(newnum1.asString);
-  print(newnum1.get());
+  num1.activated = true;
 
-  newnum1.set(10);
-  print(newnum1.get());
-  print(newnum1.getOld());
-  print(newnum1.asString);
-  print(newnum1.get());
+  num1.set(6);
+  num1.set(8);
+
+  print(num1.get());
 }
