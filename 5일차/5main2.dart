@@ -51,8 +51,6 @@ class NewBox<T> {
 }
 
 void main() {
-  var fishBox = StringBox("생선");
-  var intBox = Box(1);
   var newBox = NewBox("참돔");
 
   print(newBox.get());
