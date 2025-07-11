@@ -5,3 +5,14 @@
 // 안녕하세요
 // 10초뒤에 실행된 코드입니다.
 // 안녕하세요
+
+void main() async {
+  print("안녕하세요");
+
+  await Future.delayed(
+    Duration(seconds: 10),
+    () => print("[10초 뒤에 실행된 코드입니다.]"),
+  );
+
+  print("안녕하세요");
+}
