@@ -8,6 +8,7 @@ abstract class Vehicle {
 }
 
 class Boat implements Vehicle {
+  //추가적인 기능을 추상함수에 추가할때 override 추가해야한다.
   @override
   drive() {
     print("보트가 물 위를 떠다닙니다.");
