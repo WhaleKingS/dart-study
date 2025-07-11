@@ -4,15 +4,27 @@
 //Boat:[보트가 물 위를 떠다닙니다.], Car:[자동차가 도로를 달립니다.]
 
 abstract class Vehicle {
-  void ride(){
-  }
+  void drive();
+}
 
 class Boat implements Vehicle {
-  late String ""
-
-} 
-
-  class Car implements Vehicle {
-
+  @override
+  drive() {
+    print("보트가 물 위를 떠다닙니다.");
+  }
 }
+
+class Car implements Vehicle {
+  @override
+  drive() {
+    print("자동차가 도로를 달려다닙니다.");
+  }
+}
+
+void main() {
+  var car = Car();
+  var boat = Boat();
+
+  car.drive();
+  boat.drive();
 }

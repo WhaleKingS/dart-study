@@ -1,4 +1,4 @@
-// 클래스 내에서 같은 이름을 가진 함수를 사용할 수 있다. O
+// 클래스 내에서 같은 이름을 가진 함수를 사용할 수 있다. X
 //추상 클래스는 main() 함수에서 사용할 수 있다. X
 //클래스 내에서 연산자를 함수명으로 사용해야 할때 연산자 앞에 무엇을 작성해야하는가?
 //operater을 앞에 붙어줘야한다.
@@ -15,7 +15,19 @@ class Human {
   late int age;
   late String gender;
 
-  Human(String givenname, int givenage, String givensex) {
+  //기본적으로 생성자를 반드는 방법
+  // Human(String givenname, int givenage, String givensex) {
+  //   name = givenname;
+  //   age = givenage;
+  //   gender = givensex;
+  // }
+
+  //name parmeter를 이용해 생성자를 만드는 방법
+  Human({
+    required String givenname,
+    required int givenage,
+    required String givensex,
+  }) {
     name = givenname;
     age = givenage;
     gender = givensex;
@@ -33,6 +45,7 @@ class Human {
 }
 
 void main() {
-  var human = Human("김철수", 20, "남성");
-  print(human.profile());
+  var pl1 = Human(givenname: "rnjsoxdbs", givenage: 12, givensex: "남자");
+
+  print(pl1.profile());
 }
