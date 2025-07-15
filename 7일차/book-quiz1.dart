@@ -14,7 +14,7 @@ Future main() async {
         //request 에 따른 기능 구현
         var varList = request.uri.path.split(',');
         var dan = int.parse(varList[1]);
-        var result;
+
         //1~9 까지 전부 곱하기 기능을 write 해야한다.
         // for(var i = 1; i <= 9 ; i ++){
         //   result

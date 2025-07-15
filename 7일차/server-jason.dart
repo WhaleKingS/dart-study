@@ -1,9 +1,3 @@
-// HTTP 에서 가장 많이 사용할 메서드 4가지
-// 1. GET : 우리가 서버에게 어떤 것을 읽겠다 라고 보내는 요청
-// 2. POST : 우리가 서버에게 어떤 것을 쓰겠다 (생성하겠다) 라고 보내는 요청
-// 3. PUT : 우리가 서버에게 어떤 것을 쓰겠다 (수정하겠다) 라고 보내는 요청
-// 4. DELETE : 우리가 서버에게 어떤 것을 삭제하겠다 라고 보내는 요청
-
 import 'dart:io';
 import 'dart:convert';
 
@@ -97,53 +91,32 @@ void httpPostHandler(HttpRequest request) async {
   await request.response.close();
 }
 
-void httpDeleteHandler(HttpRequest request) async {
-  var filename = request.uri.path.substring(1);
-  if (await File(filename).exists() == true) {
-    var content = "$filename deleted";
-    File(filename).deleteSync();
-    request.response
-      ..headers.contentType = ContentType('text', 'plain', charset: "utf-8")
-      ..headers.contentLength = content.length
-      ..statusCode = HttpStatus.ok
-      ..write(content);
-  } else {
-    var content = "$filename not found";
-    request.response
-      ..headers.contentType = ContentType('text', 'plain', charset: "utf-8")
-      ..headers.contentLength = content.length
-      ..statusCode = HttpStatus.notFound
-      ..write(content);
-  }
-  await request.response.close();
-}
-
 Future main() async {
-  var server = await HttpServer.bind(InternetAddress.loopbackIPv4, 3000);
-
+  var server = await HttpServer.bind(
+    InternetAddress.loopbackIPv4, // ip address
+    3001, // port number
+  );
   printHttpServerActivated(server);
 
   await for (HttpRequest request in server) {
     printHttpRequestInfo(request);
     try {
-      switch (request.method) {
-        case 'GET':
-          httpGetHandler(request);
-          break;
-        case 'PUT':
-          httpPutHanlder(server.address.address, server.port, request);
-          break;
-        case 'POST':
-          httpPostHandler(request);
-          break;
-        case 'DELETE':
-          httpDeleteHandler(request);
-          break;
-        default:
-          print("\$ Unsupported http method");
-      }
+      // start-of-modification
+      var content = await utf8.decoder.bind(request).join();
+      var jsonData = jsonDecode(content) as Map;
+      print("\> content        : $jsonData");
+      print("\$ jsonData['Korea'] is ${jsonData['Korea']}");
+      print("\$ jsonData['Japan'] is ${jsonData['Japan']}");
+      print("\$ jsonData['China'] is ${jsonData['China']}");
+      content = "POST JSON accepted";
+      request.response
+        ..headers.contentType = ContentType('text', 'plain', charset: "utf-8")
+        ..headers.contentLength = content.length
+        ..statusCode = HttpStatus.ok
+        ..write(content);
+      await request.response.close();
     } catch (err) {
-      print("\$ Exception in http request processing");
+      print("\$ 예상치 못한 에러가 발생했다.");
     }
   }
 }
