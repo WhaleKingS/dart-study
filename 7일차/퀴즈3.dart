@@ -6,3 +6,16 @@
 // 경로는 /delete=나라이름 이며,
 // 해당 데이터를 삭제한 후 남아있는 나라들을 반환해야 합니다.
 // 반환되는 데이터는 JSON 형식이여야 합니다.
+
+import 'dart:io';
+import 'dart:convert';
+
+void httpGetHandler(HttpRequest request) async {
+  Map country = {
+    "Korea": "Seoul",
+    "Japan": "Tokyo",
+    "China": "Beijing",
+    "Canada": "Ottawa",
+    "Austrailia": "Canberra",
+  };
+}
