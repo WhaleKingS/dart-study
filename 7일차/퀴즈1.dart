@@ -10,11 +10,10 @@ import 'dart:math';
 
 void main() {
   // 랜덤 객체 생성
-  var random = Random();
 
   // A와 B에 1 ~ 10 사이의 랜덤 숫자 할당
-  int A = random.nextInt(10) + 1;
-  int B = random.nextInt(10) + 1;
+  int A = Random().nextInt(10) + 1;
+  int B = Random().nextInt(10) + 1;
 
   // 비교하고 결과 출력
   if (A > B) {
