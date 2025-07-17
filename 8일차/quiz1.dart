@@ -8,23 +8,24 @@ import 'dart:io';
 
 void create(Map database, HttpRequest request) async {
   // 생성 코드 작성
-  var content = await utf8.decoder.bind(request).join();
-  var transaction = jsonDecode(content) as Map;
+  var bodydata = await utf8.decoder.bind(request).join();
+  var mapData = jsonDecode(bodydata) as Map;
   var key, value;
 
-  transaction.forEach((k, v) {
+  //map에서 key0001과 value 권태윤을 추출해보자
+  mapData.forEach((k, v) {
     key = k;
     value = v;
   });
 
   if (database.containsKey(key) == false) {
     database[key] = value;
-    content = "Success < $transaction created >";
+    bodydata = "Success < $mapData created >";
   } else {
-    content = "Fail < $key already exist >";
+    bodydata = "Fail < $key already exist >";
   }
 
-  printAndSendHttpResponse(database, request, content);
+  printAndSendHttpResponse(database, request, bodydata);
 }
 
 void read(Map database, HttpRequest request) async {
@@ -146,11 +147,14 @@ void printAndSendHttpResponse(
   String content,
 ) async {
   print("\$ $content \n current DB      : $database");
+
+  var data = utf8.encode(content);
+
   request.response
     ..headers.contentType = ContentType('text', 'plain', charset: 'utf-8')
-    ..headers.contentLength = content.length
+    ..headers.contentLength = data.length
     ..statusCode = HttpStatus.ok
-    ..write(content);
+    ..add(data);
 
   await request.response.close();
 }
